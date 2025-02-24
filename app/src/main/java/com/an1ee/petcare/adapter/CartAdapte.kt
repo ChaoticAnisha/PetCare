@@ -46,7 +46,7 @@ class CartAdapter(
             if (item.quantity > 1) {
                 onQuantityChanged(item.id, item.quantity - 1)
             } else {
-                onQuantityChanged(item.id, 0) // This will remove the item
+                onQuantityChanged(item.id, 0)
             }
         }
     }

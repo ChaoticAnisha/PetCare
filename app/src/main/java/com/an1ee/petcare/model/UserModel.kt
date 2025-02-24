@@ -4,16 +4,20 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class UserModel(
-    var fullName : String = "",
-    var email : String = "",
-    var password : String = "",
-    var conformPassword : String = "",
+    val id: String = "", // Add ID field
+    var fullName: String = "",
+    var email: String = "",
+    var password: String = "",
+    var role: String = "USER", // Standardize role names
+    var createdAt: Long = System.currentTimeMillis(),
+    var lastLogin: Long = System.currentTimeMillis()
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
+        parcel.readString() ?: ""
 
     ) {
     }
@@ -22,7 +26,7 @@ data class UserModel(
         parcel.writeString(fullName)
         parcel.writeString(email)
         parcel.writeString(password)
-        parcel.writeString(conformPassword)
+        parcel.writeString(role)
     }
 
     override fun describeContents(): Int {

@@ -54,7 +54,6 @@ class RegisterActivity : AppCompatActivity() {
         val fullName = binding.editFullName.text.toString().trim()
         val email = binding.editEmail.text.toString().trim()
         val password = binding.editPassword.text.toString()
-        val confirmPassword = binding.editConfirmPassword.text.toString()
 
         if (fullName.isEmpty()) {
             binding.editFullName.error = "Full name is required"
@@ -79,20 +78,7 @@ class RegisterActivity : AppCompatActivity() {
             return false
         }
 
-        if (confirmPassword.isEmpty()) {
-            binding.editConfirmPassword.error = "Please confirm your password"
-            return false
-        }
-        if (password != confirmPassword) {
-            binding.editConfirmPassword.error = "Passwords do not match"
-            return false
-        }
 
-        model= UserModel(fullName,email,confirmPassword,confirmPassword)
-        userViewModel.signup(email,password){
-            success, message, uid->
-                println()
-        }
 
         Toast.makeText(this, "Registration Successful", Toast.LENGTH_SHORT).show()
         return true

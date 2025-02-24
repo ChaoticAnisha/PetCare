@@ -4,13 +4,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.an1ee.petcare.R
 import com.an1ee.petcare.adapter.CartAdapter
+import com.an1ee.petcare.model.Order
 import com.an1ee.petcare.utils.CartManager
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class ProductCartActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -63,8 +69,50 @@ class ProductCartActivity : AppCompatActivity() {
 
         // Place order button click listener
         buttonPlaceOrder.setOnClickListener {
-            // Implement order placement logic
+            if (CartManager.getItems().isEmpty()) {
+                Toast.makeText(this, "Your cart is empty", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            showOrderConfirmationDialog()
         }
+    }
+
+    private fun showOrderConfirmationDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Confirm Order")
+            .setMessage("Are you sure you want to place this order?")
+            .setPositiveButton("Yes") { _, _ ->
+                placeOrder()
+            }
+            .setNegativeButton("No", null)
+            .show()
+    }
+
+    private fun placeOrder() {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val order = Order(
+            id = "ORD" + System.currentTimeMillis().toString().takeLast(6),
+            date = dateFormat.format(Date()),
+            total = CartManager.getTotal(),
+            status = "Pending",
+            items = CartManager.getItems().map { it.name }
+        )
+
+        AlertDialog.Builder(this)
+            .setTitle("Order Placed Successfully!")
+            .setMessage("Your order ID is: ${order.id}\nThank you for shopping with us!")
+            .setPositiveButton("View Orders") { _, _ ->
+
+                startActivity(Intent(this, OrderActivity::class.java))
+                finish()
+            }
+            .setNegativeButton("Continue Shopping") { _, _ ->
+
+                startActivity(Intent(this, ProductDashboardActivity::class.java))
+                finish()
+            }
+            .setCancelable(false)
+            .show()
     }
 
     private fun updateCartDisplay() {

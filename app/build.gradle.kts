@@ -56,4 +56,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation ("com.airbnb.android:lottie:6.6.2")
-}
+    implementation ("com.google.firebase:firebase-auth:21.0.1")
+    implementation ("com.google.firebase:firebase-database:20.0.3")
+    }
+

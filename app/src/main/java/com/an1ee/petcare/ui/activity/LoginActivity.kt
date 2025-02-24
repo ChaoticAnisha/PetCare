@@ -68,15 +68,20 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun isauth(email: String, password: String) {
-        userViewModel.login(email,password) { success, message ->
+        userViewModel.login(email, password) { success, role ->
             if (success) {
-                startActivity(Intent(this@LoginActivity, ProductDashboardActivity::class.java))
+                if (role == "admin") {
+                    startActivity(Intent(this@LoginActivity, AdminDashboardActivity::class.java))
+                } else {
+                    startActivity(Intent(this@LoginActivity, ProductDashboardActivity::class.java))
+                }
                 finish()
             } else {
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Login failed: $role", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
 
     private fun saveLoginStatus() {
         getSharedPreferences("PetCarePrefs", MODE_PRIVATE)
