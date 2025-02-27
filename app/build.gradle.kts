@@ -63,6 +63,7 @@ dependencies {
     testImplementation("org.mockito:mockito-core:5.0.0")
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.0.0")
     testImplementation("androidx.arch.core:core-testing:2.2.0")
+    testImplementation("org.robolectric:robolectric:4.10.3")
 
         // Instrumented testing
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
@@ -73,5 +74,5 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-intents:3.5.1")
     }
 
-    
+
 
