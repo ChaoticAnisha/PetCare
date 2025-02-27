@@ -58,5 +58,11 @@ dependencies {
     implementation ("com.airbnb.android:lottie:6.6.2")
     implementation ("com.google.firebase:firebase-auth:21.0.1")
     implementation ("com.google.firebase:firebase-database:20.0.3")
+
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.mockito:mockito-core:5.0.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.0.0")
+    testImplementation("androidx.arch.core:core-testing:2.2.0") // For ViewModel testing
+
     }
 

@@ -3,6 +3,7 @@ package com.an1ee.petcare.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,7 +44,7 @@ class ProfileActivity : AppCompatActivity() {
 
         findViewById<ImageView>(R.id.button_notification).setOnClickListener {
         }
-        findViewById<ImageView>(R.id.my_order).setOnClickListener {
+        findViewById<TextView>(R.id.my_order).setOnClickListener {
             navigateToOrder()
         }
     }
