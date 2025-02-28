@@ -64,6 +64,9 @@ class ProfileActivity : AppCompatActivity() {
     private fun navigateToProductCart() {
         startActivity(Intent(this, ProductCartActivity::class.java))
     }
+    private fun navigateToNotification() {
+        startActivity(Intent(this, NotificationActivity::class.java))
+    }
 
     private fun loadOrders() {
         val orders = listOf(

@@ -50,10 +50,8 @@ class ProfileActivityUnitTest {
         activity = Robolectric.buildActivity(ProfileActivity::class.java).create().get()
         shadowActivity = shadowOf(activity)
 
-        // Set up RecyclerView mock
         activity.findViewById<RecyclerView>(R.id.recycler_orders)
 
-        // Set up navigation button mocks
         homeButton = activity.findViewById(R.id.button_home)
         cartButton = activity.findViewById(R.id.button_cart)
         notificationButton = activity.findViewById(R.id.button_notification)
@@ -62,7 +60,6 @@ class ProfileActivityUnitTest {
 
     @Test
     fun `test initialization`() {
-        // Verify RecyclerView is set up with LinearLayoutManager
         val recyclerView = activity.findViewById<RecyclerView>(R.id.recycler_orders)
         assert(recyclerView.layoutManager is LinearLayoutManager)
         assert(recyclerView.adapter is OrderAdapter)
@@ -70,10 +67,8 @@ class ProfileActivityUnitTest {
 
     @Test
     fun `test home button navigation`() {
-        // When home button is clicked
         homeButton.performClick()
 
-        // Then validate intent was created with correct destination
         val expectedIntent = shadowActivity.nextStartedActivity
         val shadowIntent = shadowOf(expectedIntent)
         assert(shadowIntent.intentClass == ProductDashboardActivity::class.java)
@@ -82,10 +77,8 @@ class ProfileActivityUnitTest {
 
     @Test
     fun `test cart button navigation`() {
-        // When cart button is clicked
         cartButton.performClick()
 
-        // Then validate intent was created with correct destination
         val expectedIntent = shadowActivity.nextStartedActivity
         val shadowIntent = shadowOf(expectedIntent)
         assert(shadowIntent.intentClass == ProductCartActivity::class.java)
@@ -93,10 +86,8 @@ class ProfileActivityUnitTest {
 
     @Test
     fun `test my order text navigation`() {
-        // When my order text is clicked
         myOrderText.performClick()
 
-        // Then validate intent was created with correct destination
         val expectedIntent = shadowActivity.nextStartedActivity
         val shadowIntent = shadowOf(expectedIntent)
         assert(shadowIntent.intentClass == OrderActivity::class.java)
@@ -104,19 +95,15 @@ class ProfileActivityUnitTest {
 
     @Test
     fun `test load orders populates adapter`() {
-        // Create a mock adapter
         val mockAdapter = mock(OrderAdapter::class.java)
 
-        // Get recyclerView and set mock adapter
         val recyclerView = activity.findViewById<RecyclerView>(R.id.recycler_orders)
         recyclerView.adapter = mockAdapter
 
-        // Manually call loadOrders (normally called in onCreate)
         val loadOrdersMethod = ProfileActivity::class.java.getDeclaredMethod("loadOrders")
         loadOrdersMethod.isAccessible = true
         loadOrdersMethod.invoke(activity)
 
-        // Verify that submitList was called with a list of orders
         verify(mockAdapter).submitList(anyList())
     }
 }

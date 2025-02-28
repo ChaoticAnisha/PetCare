@@ -7,15 +7,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.an1ee.petcare.R
+import com.an1ee.petcare.databinding.ActivityNotificationBinding
 import com.an1ee.petcare.databinding.ActivityProductDashboardBinding
 
-class ProductDashboardActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityProductDashboardBinding
+class NotificationActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityNotificationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityProductDashboardBinding.inflate(layoutInflater)
+        binding = ActivityNotificationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupWindowInsets()
@@ -32,31 +33,24 @@ class ProductDashboardActivity : AppCompatActivity() {
 
     private fun setupClickListeners() {
         with(binding) {
-            cardFood.setOnClickListener {
-                startActivity(Intent(this@ProductDashboardActivity, FoodActivity::class.java))
-            }
 
-            cardToys.setOnClickListener {
-                startActivity(Intent(this@ProductDashboardActivity, ToyActivity::class.java))
-            }
-
-            cardGrooming.setOnClickListener {
-                startActivity(Intent(this@ProductDashboardActivity, GroomingActivity::class.java))
-            }
 
             buttonProfile.setOnClickListener {
-                startActivity(Intent(this@ProductDashboardActivity, ProfileActivity::class.java))
+                startActivity(Intent(this@NotificationActivity, ProfileActivity::class.java))
             }
 
             buttonHome.setOnClickListener {
-                val intent = Intent(this@ProductDashboardActivity, ProductDashboardActivity::class.java)
+                val intent = Intent(this@NotificationActivity, ProductDashboardActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 startActivity(intent)
             }
-            buttonNotification.setOnClickListener {
-                startActivity(Intent(this@ProductDashboardActivity, NotificationActivity::class.java))
-            }
+
+
 
         }
     }
+
+
 }
+
+
